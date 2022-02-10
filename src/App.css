@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital@0;1&display=swap");
+
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#root {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100vh;
+}
+main {
+  background-color: #3aafa9;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+}
+.navbar.bg-light {
+  background-color: #3aafa9 !important;
 }
 
-.App-link {
-  color: #61dafb;
+span.brand {
+  font-family: "Poppins", sans-serif;
+  font-style: italic;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul.dropdown-menu {
+  background-color: #17242a;
+}
+
+ul.dropdown-menu li span {
+  color: #feff;
+}
+
+ul.dropdown-menu li span:hover {
+  background-color: inherit;
+  color: #3aafa9;
+}
+
+.dish {
+  width: 600px;
+  max-width: 100%;
+}
+
+.login-container {
+  /* background-color: #17242a; */
+
+  max-width: 100%;
+  width: 400px;
+}
+.login-container button {
+  background-color: #2b7a77;
+
+  font-size: 22px;
+  font-weight: 500;
+  align-self: center;
+}
+.spinner {
+  height: 40px;
+}
+.spinner-container {
+  height: 50px;
 }

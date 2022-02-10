@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import NavBar from "./components/NavBar";
+import LoginForm from "./components/LoginForm";
+import Home from "./components/Home";
+import { Route, Routes, Navigate } from "react-router-dom";
+import RequireAuth from "./components/RequireAuth";
+
+import Recipe from "./components/Recipe";
+
+import "./App.css";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+  const handleAuth = () => {
+    const token = localStorage.getItem("alkemyToken");
+    if (token && JSON.parse(token)) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  };
+
+  const useAuth = () => {
+    return isLoggedIn;
+  };
+
+  useEffect(() => {
+    handleAuth();
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+      <main>
+        <div className="app-container container d-flex flex-column justify-content-center align-items-center">
+          <Routes>
+            <Route path="/" element={<LoginForm handleLogin={handleLogin} />} />
+
+            <Route element={<RequireAuth />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/recipe/:id" element={<Recipe />} />
+            </Route>
+
+            <Route path="*" element={<Navigate to={"/home"} />} />
+          </Routes>
+        </div>
+      </main>
+    </>
   );
 }
 
