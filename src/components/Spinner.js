@@ -3,9 +3,9 @@ import React from "react";
 const Spinner = ({ loading }) => {
   return (
     loading && (
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border spinner-border-sm" role="status">
-          <span class="visually-hidden">Loading...</span>
+      <div className="d-flex justify-content-center align-items-center">
+        <div className="spinner-border spinner-border-sm" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div>
     )

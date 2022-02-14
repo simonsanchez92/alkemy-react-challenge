@@ -42,7 +42,6 @@ export const getSingleRecipe = async (RecipeId) => {
       extraInfo: rest,
     };
 
-    console.log(recipe);
     return recipe;
   } catch (e) {
     console.error(e);

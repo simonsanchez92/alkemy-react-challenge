@@ -48,7 +48,7 @@ const LoginForm = () => {
         navigate(from, { replace: true });
       } catch (err) {
         if (err.response) {
-          swal("Too bad...", err.response?.data?.error, "error");
+          swal("Invalid credentials", err.response?.data?.error, "error");
         }
         setIsLoading(false);
       }
@@ -73,7 +73,7 @@ const LoginForm = () => {
 
   return (
     <div className="login-container  mb-5 p-3 my-5 rounded  border-radius d-flex flex-column justify-content-center  rounded">
-      <h2 className="align-self-center pb-5">Login</h2>
+      <h2 className="align-self-center pb-5">Welcome</h2>
 
       <form className="login-form d-flex flex-column ">
         <div className="mb-3">
@@ -82,14 +82,16 @@ const LoginForm = () => {
           </label>
           <input
             type="email"
-            className={emailError ? "form-control is-invalid" : "form-control"}
+            className={
+              emailError ? "form-control is-invalid " : "form-control "
+            }
             id="emailInput"
             aria-describedby="emailHelp"
             value={formEmail}
             onChange={(e) => handleEmailChange(e)}
           />
 
-          <div className="invalid-feedback">Please provide an email.</div>
+          <div className="invalid-feedback">Please provide a valid email.</div>
         </div>
         <div className="mb-3">
           <label htmlFor="passwordInput" className="form-label">
@@ -118,10 +120,7 @@ const LoginForm = () => {
         </button>
       </form>
       <div className="spinner-container mt-4">
-        <Spinner
-          style={{ height: "20px", border: "1px solid red" }}
-          loading={isLoading}
-        />
+        <Spinner loading={isLoading} />
       </div>
     </div>
   );

@@ -12,13 +12,15 @@
 }
 main {
   background-color: #3aafa9;
-  flex: 1;
+  /* border: 1px solid red; */
+  padding: 50px 0;
 
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
+
 .navbar.bg-light {
   background-color: #3aafa9 !important;
 }
@@ -33,17 +35,19 @@ ul.dropdown-menu {
   background-color: #17242a;
 }
 
-ul.dropdown-menu li span {
+ul.dropdown-menu li span,
+ul.dropdown-menu li a {
   color: #feff;
 }
 
-ul.dropdown-menu li span:hover {
+ul.dropdown-menu li span:hover,
+ul.dropdown-menu li a:hover {
   background-color: inherit;
   color: #3aafa9;
 }
 
 .dish {
-  width: 600px;
+  width: 300px;
   max-width: 100%;
 }
 
@@ -53,16 +57,92 @@ ul.dropdown-menu li span:hover {
   max-width: 100%;
   width: 400px;
 }
-.login-container button {
-  background-color: #2b7a77;
 
+#emailInput,
+#passwordInput {
+  background-color: #def1f0 !important;
+}
+.login-container button {
+  background-color: #17242a;
+  color: #def2f1;
   font-size: 22px;
   font-weight: 500;
   align-self: center;
 }
-.spinner {
-  height: 40px;
+.login-container button:hover {
+  color: #3aafa9;
 }
+
 .spinner-container {
-  height: 50px;
+  height: 20px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+}
+
+/* .centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+} */
+
+.search-form {
+  width: 600px;
+  max-width: 100%;
+}
+
+h4.search-message {
+  text-align: left !important;
+  font-style: italic;
+  font-weight: 600;
+}
+.searchResults {
+  border-top: 2px solid #17242a;
+  /* background-color: #2b7a77; */
+}
+section.hero-banner {
+  margin: 0 0 60px 0;
+  padding: 80px 0;
+  background: url("./images/banner-img-2.jpg") rgba(0, 0, 0, 0.6);
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+  color: #fff;
+}
+
+.menu-container {
+  background-color: #2b7a77;
+}
+.menu {
+  border: 2px solid red;
+  /* max-width: 100%; */
+}
+.card {
+  /* height: 10px; */
+  display: block;
+  width: 450px;
+  max-width: 100%;
+  background-color: #def1f0 !important;
+}
+
+.card-title {
+}
+
+.card-body {
+  flex: 1;
+}
+.img-container {
+  /* border: 2px solid black !important; */
+}
+img.card-img {
+  height: 100px;
+  width: 100px;
+}
+
+footer {
+  background-color: #3aafa9;
 }
