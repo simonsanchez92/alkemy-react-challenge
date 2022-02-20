@@ -6,6 +6,7 @@ export const searchRecipes = async (searchTerm) => {
       `https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&apiKey=9633d50c4561455784d5013b3c7d3502`
     );
 
+    localStorage.setItem("searchResults", JSON.stringify(res.data.results));
     return res.data.results;
   } catch (e) {
     console.error(e);

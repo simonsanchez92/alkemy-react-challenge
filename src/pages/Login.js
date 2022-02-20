@@ -4,12 +4,12 @@ import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useEffect } from "react/cjs/react.development";
-import Spinner from "./Spinner";
+import Spinner from "../components/Spinner";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSign, faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 
-const LoginForm = () => {
+const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formEmail, setFormEmail] = useState("");
   const [formPassword, setFormPassword] = useState("");
@@ -72,10 +72,10 @@ const LoginForm = () => {
   }, []);
 
   return (
-    <div className="login-container  mb-5 p-3 my-5 rounded  border-radius d-flex flex-column justify-content-center  rounded">
+    <div className="login-container w-100  mb-5 p-3 my-5 d-flex flex-column justify-content-center">
       <h2 className="align-self-center pb-5">Welcome</h2>
 
-      <form className="login-form d-flex flex-column ">
+      <form className="login-form align-self-center d-flex flex-column">
         <div className="mb-3">
           <label htmlFor="emailInput" className="form-label">
             Email address
@@ -126,4 +126,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;

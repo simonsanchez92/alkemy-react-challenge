@@ -8,21 +8,40 @@
 #root {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
-main {
-  background-color: #3aafa9;
-  /* border: 1px solid red; */
-  padding: 50px 0;
 
+.app-container {
+  background-color: #3aafa9;
+}
+
+main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+main .main-inner {
+  display: block;
+  min-height: 75vh;
+  height: inherit !important;
+}
 
-.navbar.bg-light {
-  background-color: #3aafa9 !important;
+nav ul li a {
+  text-decoration: none;
+  color: #17242a !important;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+nav ul li a:hover {
+  color: #2b7a77 !important;
+}
+.login-form {
+  width: 400px;
+  max-width: 100%;
+}
+
+.homepage {
+  min-height: 100vh;
 }
 
 span.brand {
@@ -52,8 +71,6 @@ ul.dropdown-menu li a:hover {
 }
 
 .login-container {
-  /* background-color: #17242a; */
-
   max-width: 100%;
   width: 400px;
 }
@@ -80,21 +97,14 @@ ul.dropdown-menu li a:hover {
   left: 50%;
 }
 
-/* .centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -50px;
-} */
-
 .search-form {
   width: 600px;
   max-width: 100%;
+  color: rgb(2, 46, 2);
 }
 
 h4.search-message {
-  text-align: left !important;
+  width: 100%;
   font-style: italic;
   font-weight: 600;
 }
@@ -103,46 +113,117 @@ h4.search-message {
   /* background-color: #2b7a77; */
 }
 section.hero-banner {
-  margin: 0 0 60px 0;
-  padding: 80px 0;
-  background: url("./images/banner-img-2.jpg") rgba(0, 0, 0, 0.6);
+  padding: 120px 0;
+  background: url("./images/banner-img.jpg") rgba(0, 0, 0, 0.6);
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: multiply;
   color: #fff;
+  margin-bottom: 140px !important;
+}
+section.hero-banner h1 {
+  font-size: 50px;
+}
+
+section.hero-banner button:hover {
+  color: #17242a;
 }
 
 .menu-container {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
   background-color: #2b7a77;
 }
-.menu {
-  border: 2px solid red;
-  /* max-width: 100%; */
-}
+
 .card {
-  /* height: 10px; */
   display: block;
   width: 450px;
   max-width: 100%;
   background-color: #def1f0 !important;
 }
 
+.recipe-top h1 {
+  background-color: #17242a;
+}
+
 .card-title {
+  font-style: italic;
+  font-weight: 500;
 }
 
 .card-body {
   flex: 1;
 }
-.img-container {
-  /* border: 2px solid black !important; */
-}
+
 img.card-img {
   height: 100px;
   width: 100px;
 }
 
+.info-container-bottom ul {
+  width: 450px;
+  max-width: 100%;
+}
+.summary {
+  flex: 1;
+}
+.summary p {
+  text-align: justify;
+}
+
+.recipe-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.recipe-img-container img {
+  width: 350px;
+  max-height: 350px;
+}
+.info-container-bottom {
+  width: 450px;
+  max-width: 100%;
+  overflow: hidden;
+  height: 1%;
+}
+
+.details-top {
+  background-color: #17242a;
+}
+.ingredients-container {
+  width: 450px;
+  max-width: 100%;
+}
+.instructions-inner {
+  max-width: 100%;
+}
+
+.instructions h4,
+.ingredients-container h4 {
+  background-color: #17242a;
+}
+.instructions ol {
+  padding: 0;
+}
+.instructions ol li {
+  padding: 10px 0;
+  text-align: justify;
+  line-height: 1.6rem;
+  word-spacing: -0.5px;
+}
 footer {
+  border-top: 1px solid #17242a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
   background-color: #3aafa9;
+}
+
+.Toastify__toast-container {
+  max-width: 85% !important;
 }

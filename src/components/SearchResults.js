@@ -13,6 +13,7 @@ const SearchResults = ({ recipes, handleAdd }) => {
             imageUrl={recipe.image}
             menuDish={false}
             action={() => handleAdd(recipe)}
+            r={recipes}
           />
         ))}
     </div>

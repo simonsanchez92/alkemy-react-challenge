@@ -1,13 +1,11 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
 import SearchResults from "../components/SearchResults";
 import Spinner from "../components/Spinner";
 import { searchRecipes, getSingleRecipe } from "../API/actions";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import usePersistedState from "../hooks/usePersistedState";
-import Banner from "../components/Banner";
 
 const Search = () => {
   const [dishes, setDishes] = usePersistedState("dishes", []);
@@ -55,23 +53,30 @@ const Search = () => {
     setIsLoading(false);
   };
 
+  const validateForm = (values) => {
+    const errors = {};
+
+    if (values.term.length === 0) {
+      errors.term = "Please enter a term...";
+    } else if (values.term.length < 2) {
+      errors.term = "Term must be at least 2 characters long...";
+    }
+    return errors;
+  };
+
+  useEffect(() => {
+    setSearchedRecipes(JSON.parse(localStorage.getItem("searchResults")) ?? []);
+  }, []);
+
   return (
     <Fragment>
-      <Banner />
-
       <div className="d-flex flex-column align-items-center">
+        <h2 className="pb-5">Your experience begins here...</h2>
         <Formik
           initialValues={{ term: "" }}
-          validate={(values) => {
-            const errors = {};
-
-            if (values.term.length === 0) {
-              errors.term = "Required";
-            } else if (values.term.length < 2) {
-              errors.term = "Term must be at least 2 characters long";
-            }
-            return errors;
-          }}
+          validateOnBlur={false}
+          validateOnChange={false}
+          validate={(values) => validateForm(values)}
           onSubmit={async (values, { setSubmitting }) => {
             setIsLoading(true);
             const fetchedRecipes = await searchRecipes(values.term);
@@ -114,7 +119,7 @@ const Search = () => {
           )}
         </Formik>
 
-        <h4 className="search-message py-3">{message}</h4>
+        <h4 className="search-message py-3 mt-4">{message}</h4>
 
         {searchedRecipes.length > 1 && (
           <SearchResults recipes={searchedRecipes} handleAdd={handleAddDish} />
