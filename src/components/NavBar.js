@@ -5,10 +5,11 @@ import { faSignOutAlt, faUtensils } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../API/actions";
 import Spinner from "./Spinner";
 
-const NavBar = ({ router }) => {
+const NavBar = ({ logged, router }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { pathname } = router.location;
+
   const handleLogout = () => {
     setIsLoading(true);
 
@@ -59,14 +60,14 @@ const NavBar = ({ router }) => {
               </li>
 
               <li className="nav-item mx-2  d-flex justify-content-end align-items-center">
-                <a
+                <span
                   className="item mr-4"
                   onClick={handleLogout}
                   style={{ cursor: "pointer" }}
                 >
                   Logout{" "}
                   <FontAwesomeIcon className="ml-4" icon={faSignOutAlt} />
-                </a>
+                </span>
               </li>
             </ul>
           </div>

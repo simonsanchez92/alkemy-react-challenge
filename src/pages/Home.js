@@ -1,15 +1,14 @@
-import React, { Fragment, useState } from "react";
-
-import Spinner from "../components/Spinner";
+import React from "react";
 import Menu from "../components/Menu";
+import AnimatedPage from "../components/AnimatedPage";
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
-    <div className="homepage">
-      <Menu />
-    </div>
+    <AnimatedPage>
+      <div className="homepage">
+        <Menu />
+      </div>
+    </AnimatedPage>
   );
 };
 

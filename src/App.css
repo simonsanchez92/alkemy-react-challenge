@@ -26,14 +26,16 @@ main .main-inner {
   height: inherit !important;
 }
 
-nav ul li a {
+nav ul li a,
+nav ul li span {
   text-decoration: none;
   color: #17242a !important;
   font-weight: 500;
   transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
-nav ul li a:hover {
-  color: #2b7a77 !important;
+nav ul li a:hover,
+nav ul li span:hover {
+  color: #415554 !important;
 }
 .login-form {
   width: 400px;
@@ -224,6 +226,9 @@ footer {
   background-color: #3aafa9;
 }
 
+.not-found {
+  /* min-height: 75vh !important; */
+}
 .Toastify__toast-container {
   max-width: 85% !important;
 }

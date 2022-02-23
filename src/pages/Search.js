@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import SearchResults from "../components/SearchResults";
 import Spinner from "../components/Spinner";
@@ -6,6 +6,7 @@ import { searchRecipes, getSingleRecipe } from "../API/actions";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import usePersistedState from "../hooks/usePersistedState";
+import AnimatedPage from "../components/AnimatedPage";
 
 const Search = () => {
   const [dishes, setDishes] = usePersistedState("dishes", []);
@@ -69,7 +70,7 @@ const Search = () => {
   }, []);
 
   return (
-    <Fragment>
+    <AnimatedPage>
       <div className="d-flex flex-column align-items-center">
         <h2 className="pb-5">Your experience begins here...</h2>
         <Formik
@@ -141,7 +142,7 @@ const Search = () => {
           <Spinner loading={isLoading} />
         </div>
       </div>
-    </Fragment>
+    </AnimatedPage>
   );
 };
 

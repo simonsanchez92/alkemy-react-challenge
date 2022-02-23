@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import usePersistedState from "../hooks/usePersistedState";
 import Spinner from "../components/Spinner";
-import { getSingleRecipe } from "../API/actions";
-import { v4 as uuidv4 } from "uuid";
-import { ToastContainer, toast } from "react-toastify";
-
-import { useParams } from "react-router-dom";
+import AnimatedPage from "../components/AnimatedPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastContainer, toast } from "react-toastify";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from "uuid";
+import { getSingleRecipe } from "../API/actions";
 
 const Recipe = () => {
   const [dishes, setDishes] = usePersistedState("dishes", []);
@@ -50,17 +50,20 @@ const Recipe = () => {
     setIsLoading(false);
   };
 
-  useEffect(async () => {
-    const r = await getSingleRecipe(id);
-    setRecipe(r);
-    setIsLoading(false);
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const r = await getSingleRecipe(id);
+      setRecipe(r);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [id]);
 
   return (
     <>
       <div className="recipe-container container ">
         {recipe.title ? (
-          <>
+          <AnimatedPage>
             <div className="recipe-top rounded-top">
               <h1 className="text-light p-3 m-0">{recipe.title}</h1>
             </div>
@@ -147,7 +150,7 @@ const Recipe = () => {
                 />
               </div>
             </div>
-          </>
+          </AnimatedPage>
         ) : (
           <div className="spinner-container centered mt-4">
             <Spinner loading={isLoading} />
