@@ -1,23 +1,18 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import Home from "../pages/Home";
-import App from "../App";
+import { fireEvent, render } from "@testing-library/react";
+
 import Login from "../pages/Login";
-import { validateEmail } from "../pages/Login";
+import Search from "../pages/Search";
+
 import { BrowserRouter } from "react-router-dom";
 
 import { Simulate } from "react-dom/test-utils";
 
-import Enzyme, { mount } from "enzyme";
-
 import mockAxios from "jest-mock-axios";
-import { login } from "../API/actions";
+import { login, searchRecipes } from "../API/actions";
 
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-Enzyme.configure({ adapter: new Adapter() });
-
-describe("Login fields on submit", () => {
+describe("Login process", () => {
   test("Empty email input should show error message", () => {
     const { getByLabelText, getByText, getByTitle } = render(
       <BrowserRouter>
@@ -112,48 +107,24 @@ describe("Login fields on submit", () => {
         password,
       }
     );
+
     expect(mockAxios.post).toHaveBeenCalledTimes(1);
     expect(response).toEqual({ success: false });
   });
 
-  //   test("Validate function should pass on correct input", () => {
-  //     const text = "text@test.com";
+  describe("Searching for a dish", () => {
+    test("Search bar should be present in document", () => {
+      const { getByText, getByPlaceholderText } = render(
+        <BrowserRouter>
+          <Search />
+        </BrowserRouter>
+      );
 
-  //     expect(validateEmail("test")).toBe(true);
-  //   });
+      const searchInput = getByPlaceholderText("Search for a dish...");
+      const submitButton = getByText("Submit");
 
-  //   test("Validate function should fail on incorrect input", () => {
-  //     expect(validateEmail("lala")).not.toBe(true);
-  //   });
-
-  //   test("Login form should be present in document", () => {
-  //     const component = render(
-  //       <BrowserRouter>
-  //         <Login />
-  //       </BrowserRouter>
-  //     );
-  //     const labelNode = component.getByText("Email address");
-
-  //     expect(labelNode).toBeInTheDocument();
-  //   });
-
-  //   test("Email field should have label", () => {
-  //     const component = render(
-  //       <BrowserRouter>
-  //         <Login />
-  //       </BrowserRouter>
-  //     );
-  //     const emailInputNode = component.getByLabelText("Email address");
-  //     expect(emailInputNode.getAttribute("name")).toBe("email");
-  //   });
+      expect(searchInput).toBeInTheDocument();
+      expect(submitButton).toBeInTheDocument();
+    });
+  });
 });
-
-// test("render page", () => {
-//   const component = render(
-//     <BrowserRouter>
-//       <Login />
-//     </BrowserRouter>
-//   );
-
-//   console.log(component);
-// });
