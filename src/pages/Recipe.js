@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import usePersistedState from "../hooks/usePersistedState";
 import Spinner from "../components/Spinner";
+import AnimatedPage from "../components/AnimatedPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ToastContainer, toast } from "react-toastify";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -62,7 +63,7 @@ const Recipe = () => {
     <>
       <div className="recipe-container container ">
         {recipe.title ? (
-          <>
+          <AnimatedPage>
             <div className="recipe-top rounded-top">
               <h1 className="text-light p-3 m-0">{recipe.title}</h1>
             </div>
@@ -149,7 +150,7 @@ const Recipe = () => {
                 />
               </div>
             </div>
-          </>
+          </AnimatedPage>
         ) : (
           <div className="spinner-container centered mt-4">
             <Spinner loading={isLoading} />

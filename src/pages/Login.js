@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 import swal from "sweetalert";
 import { login } from "../API/actions";
+import AnimatedPage from "../components/AnimatedPage";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,65 +59,67 @@ const Login = () => {
   }, [from, navigate]);
 
   return (
-    <div className="login-container w-100  mb-5 p-3 my-5 d-flex flex-column justify-content-center">
-      <h2 className="align-self-center pb-5">Welcome</h2>
+    <AnimatedPage>
+      <div className="login-container w-100  mb-5 p-3 my-5 d-flex flex-column justify-content-center">
+        <h2 className="align-self-center pb-5">Welcome</h2>
 
-      <form className="login-form align-self-center d-flex flex-column">
-        <div className="mb-3">
-          <label htmlFor="emailInput" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            name="email"
-            className={
-              emailError ? "form-control is-invalid " : "form-control "
-            }
-            id="emailInput"
-            aria-describedby="emailHelp"
-            value={formEmail}
-            onChange={(e) => handleEmailChange(e)}
-          />
+        <form className="login-form align-self-center d-flex flex-column">
+          <div className="mb-3">
+            <label htmlFor="emailInput" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              name="email"
+              className={
+                emailError ? "form-control is-invalid " : "form-control "
+              }
+              id="emailInput"
+              aria-describedby="emailHelp"
+              value={formEmail}
+              onChange={(e) => handleEmailChange(e)}
+            />
 
-          {emailError && (
-            <div className="invalid-feedback">
-              Please provide a valid email.
-            </div>
-          )}
+            {emailError && (
+              <div className="invalid-feedback">
+                Please provide a valid email.
+              </div>
+            )}
+          </div>
+          <div className="mb-3">
+            <label htmlFor="passwordInput" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className={
+                passwordError ? "form-control is-invalid" : "form-control"
+              }
+              id="passwordInput"
+              value={formPassword}
+              onChange={(e) => handlePasswordChange(e)}
+            />
+            {passwordError && (
+              <div className="invalid-feedback">Please provide a password.</div>
+            )}
+          </div>
+
+          <button
+            title="login-btn"
+            disabled={isLoading}
+            type="submit"
+            className="btn w-75 my-3 "
+            onClick={(e) => handleLogin(e)}
+          >
+            <span className="px-2">Log In</span>
+            <FontAwesomeIcon icon={faArrowCircleRight} />
+          </button>
+        </form>
+        <div className="spinner-container mt-4">
+          <Spinner loading={isLoading} />
         </div>
-        <div className="mb-3">
-          <label htmlFor="passwordInput" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className={
-              passwordError ? "form-control is-invalid" : "form-control"
-            }
-            id="passwordInput"
-            value={formPassword}
-            onChange={(e) => handlePasswordChange(e)}
-          />
-          {passwordError && (
-            <div className="invalid-feedback">Please provide a password.</div>
-          )}
-        </div>
-
-        <button
-          title="login-btn"
-          disabled={isLoading}
-          type="submit"
-          className="btn w-75 my-3 "
-          onClick={(e) => handleLogin(e)}
-        >
-          <span className="px-2">Log In</span>
-          <FontAwesomeIcon icon={faArrowCircleRight} />
-        </button>
-      </form>
-      <div className="spinner-container mt-4">
-        <Spinner loading={isLoading} />
       </div>
-    </div>
+    </AnimatedPage>
   );
 };
 
