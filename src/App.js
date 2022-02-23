@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./components/NavBar";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -18,23 +18,8 @@ import Search from "./pages/Search";
 import Recipe from "./pages/Recipe";
 
 import { scroller } from "react-scroll";
-
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
-  }
-
-  return ComponentWithRouterProp;
-}
-
-const BannerWithRouter = withRouter(Banner);
-const Nav = withRouter(NavBar);
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,9 +36,19 @@ function App() {
     }
   };
 
-  const useAuth = () => {
-    return isLoggedIn;
-  };
+  function withRouter(Component) {
+    function ComponentWithRouterProp(props) {
+      let location = useLocation();
+      let navigate = useNavigate();
+      let params = useParams();
+      return <Component {...props} router={{ location, navigate, params }} />;
+    }
+
+    return ComponentWithRouterProp;
+  }
+
+  const BannerWithRouter = withRouter(Banner);
+  const Nav = withRouter(NavBar);
 
   function handleScroll() {
     scroller.scrollTo("main", { smooth: true });

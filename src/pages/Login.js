@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import swal from "sweetalert";
-import axios from "axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import { login } from "../API/actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSign, faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
+import swal from "sweetalert";
+
+export const validateEmail = (str) => str === "test";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,14 +17,12 @@ const Login = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
-  const setAuth = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/home";
 
-  const login = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
     if (formEmail === "") {
       setEmailError(true);
     }
@@ -35,24 +33,15 @@ const Login = () => {
 
     if (formEmail !== "" && formPassword !== "") {
       setIsLoading(true);
-
       try {
-        const res = await axios.post("http://challenge-react.alkemy.org/", {
-          email: formEmail,
-          password: formPassword,
-        });
-
-        const token = res?.data?.token;
-        localStorage.setItem("alkemyToken", JSON.stringify(token));
-
+        await login(formEmail, formPassword);
         navigate(from, { replace: true });
       } catch (err) {
-        if (err.response) {
-          swal("Invalid credentials", err.response?.data?.error, "error");
-        }
-        setIsLoading(false);
+        swal("Invalid credentials", err.response?.data?.error, "error");
       }
     }
+
+    setIsLoading(false);
   };
 
   const handleEmailChange = (e) => {
@@ -82,6 +71,7 @@ const Login = () => {
           </label>
           <input
             type="email"
+            name="email"
             className={
               emailError ? "form-control is-invalid " : "form-control "
             }
@@ -91,7 +81,11 @@ const Login = () => {
             onChange={(e) => handleEmailChange(e)}
           />
 
-          <div className="invalid-feedback">Please provide a valid email.</div>
+          {emailError && (
+            <div className="invalid-feedback">
+              Please provide a valid email.
+            </div>
+          )}
         </div>
         <div className="mb-3">
           <label htmlFor="passwordInput" className="form-label">
@@ -106,14 +100,17 @@ const Login = () => {
             value={formPassword}
             onChange={(e) => handlePasswordChange(e)}
           />
-          <div className="invalid-feedback">Please provide a password.</div>
+          {passwordError && (
+            <div className="invalid-feedback">Please provide a password.</div>
+          )}
         </div>
 
         <button
+          title="login-btn"
           disabled={isLoading}
           type="submit"
           className="btn w-75 my-3 "
-          onClick={(e) => login(e)}
+          onClick={(e) => handleLogin(e)}
         >
           <span className="px-2">Log In</span>
           <FontAwesomeIcon icon={faArrowCircleRight} />

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const Banner = ({ router, handleScroll }) => {
+const Banner = ({ handleScroll, router }) => {
   return (
     <>
       {router.location.pathname === "/search" && (

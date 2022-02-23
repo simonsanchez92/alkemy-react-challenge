@@ -1,5 +1,20 @@
 import axios from "axios";
 
+export const login = async (email, password) => {
+  const res = await axios.post("http://challenge-react.alkemy.org/", {
+    email,
+    password,
+  });
+  const token = await res?.data?.token;
+  localStorage.setItem("alkemyToken", JSON.stringify(token));
+
+  //testing purposes
+  if (email !== "challenge@alkemy.org" || password !== "react") {
+    return { success: false };
+  }
+  return { success: true };
+};
+
 export const searchRecipes = async (searchTerm) => {
   try {
     const res = await axios.get(

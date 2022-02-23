@@ -5,10 +5,11 @@ import { faSignOutAlt, faUtensils } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../API/actions";
 import Spinner from "./Spinner";
 
-const NavBar = ({ router }) => {
+const NavBar = ({ logged, router }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { pathname } = router.location;
+
   const handleLogout = () => {
     setIsLoading(true);
 
