@@ -1,14 +1,14 @@
 import axios from "axios";
 
 export const login = async (email, password) => {
-  const res = await axios.post(process.env.REACT_APP_LOGIN_URL, {
+  const res = await axios.post("http://challenge-react.alkemy.org/", {
     email,
     password,
   });
   const token = await res?.data?.token;
   localStorage.setItem("alkemyToken", JSON.stringify(token));
 
-  //testing purposes
+  //only for testing purposes...
   if (email !== "challenge@alkemy.org" || password !== "react") {
     return { success: false };
   }
@@ -18,7 +18,7 @@ export const login = async (email, password) => {
 export const searchRecipes = async (searchTerm) => {
   try {
     const res = await axios.get(
-      `${process.env.REACT_APP_BASE_SEARCH_URL}/complexSearch?query=${searchTerm}&apiKey=${process.env.REACT_APP_API_KEY}`
+      `https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&apiKey=${process.env.REACT_APP_API_KEY}`
     );
 
     localStorage.setItem("searchResults", JSON.stringify(res.data.results));
@@ -31,7 +31,7 @@ export const searchRecipes = async (searchTerm) => {
 export const getSingleRecipe = async (RecipeId) => {
   try {
     const res = await axios.get(
-      `${process.env.REACT_APP_BASE_SEARCH_URL}${RecipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+      `https://api.spoonacular.com/recipes/${RecipeId}/information?apiKey=${process.env.REACT_APP_API_KEY}`
     );
 
     const {

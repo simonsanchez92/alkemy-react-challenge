@@ -1,32 +1,30 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import Footer from "./components/Footer";
 import Banner from "./components/Banner";
-import {
-  Route,
-  Routes,
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import RequireAuth from "./components/RequireAuth";
 import Search from "./pages/Search";
-
+import Footer from "./components/Footer";
 import Recipe from "./pages/Recipe";
-
-import { scroller } from "react-scroll";
+import NotFound from "./pages/NotFound";
+import { Route, Routes } from "react-router-dom";
+import RequireAuth from "./components/RequireAuth";
+import { withRouter } from "./utils/withRouter";
+import { handleScroll } from "./utils/scroller";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  //To handle redirection
+  const AppBanner = withRouter(Banner);
+  const Nav = withRouter(NavBar);
+
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
+
   const handleAuth = () => {
     const token = localStorage.getItem("alkemyToken");
     if (token && JSON.parse(token)) {
@@ -36,33 +34,14 @@ function App() {
     }
   };
 
-  function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-      let location = useLocation();
-      let navigate = useNavigate();
-      let params = useParams();
-      return <Component {...props} router={{ location, navigate, params }} />;
-    }
-
-    return ComponentWithRouterProp;
-  }
-
-  const BannerWithRouter = withRouter(Banner);
-  const Nav = withRouter(NavBar);
-
-  function handleScroll() {
-    scroller.scrollTo("main", { smooth: true });
-  }
-
   useEffect(() => {
     handleAuth();
   }, [isLoggedIn]);
 
   return (
     <div className="app-container">
-      {/* <NavBar /> */}
       <Nav logged={isLoggedIn} />
-      <BannerWithRouter handleScroll={handleScroll} />
+      <AppBanner handleScroll={handleScroll} />
       <main name="main">
         <div className="container main-inner py-5 d-flex flex-column ">
           <Routes>
@@ -73,7 +52,7 @@ function App() {
               <Route path="/recipe/:id" element={<Recipe />} />
             </Route>
 
-            <Route path="*" element={<Navigate to={"/home"} />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </main>

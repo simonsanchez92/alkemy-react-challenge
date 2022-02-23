@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import usePersistedState from "../hooks/usePersistedState";
 import Spinner from "../components/Spinner";
-import { getSingleRecipe } from "../API/actions";
-import { v4 as uuidv4 } from "uuid";
-import { ToastContainer, toast } from "react-toastify";
-
-import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastContainer, toast } from "react-toastify";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from "uuid";
+import { getSingleRecipe } from "../API/actions";
 
 const Recipe = () => {
   const [dishes, setDishes] = usePersistedState("dishes", []);
@@ -50,11 +49,14 @@ const Recipe = () => {
     setIsLoading(false);
   };
 
-  useEffect(async () => {
-    const r = await getSingleRecipe(id);
-    setRecipe(r);
-    setIsLoading(false);
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const r = await getSingleRecipe(id);
+      setRecipe(r);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [id]);
 
   return (
     <>

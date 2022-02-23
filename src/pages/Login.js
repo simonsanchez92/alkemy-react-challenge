@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Spinner from "../components/Spinner";
-import { login } from "../API/actions";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 import swal from "sweetalert";
-
-export const validateEmail = (str) => str === "test";
+import { login } from "../API/actions";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +55,7 @@ const Login = () => {
     if (localStorage.getItem("alkemyToken")) {
       navigate(from, { replace: true });
     }
-  }, []);
+  }, [from, navigate]);
 
   return (
     <div className="login-container w-100  mb-5 p-3 my-5 d-flex flex-column justify-content-center">

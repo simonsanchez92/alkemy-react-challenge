@@ -60,14 +60,14 @@ const NavBar = ({ logged, router }) => {
               </li>
 
               <li className="nav-item mx-2  d-flex justify-content-end align-items-center">
-                <a
+                <span
                   className="item mr-4"
                   onClick={handleLogout}
                   style={{ cursor: "pointer" }}
                 >
                   Logout{" "}
                   <FontAwesomeIcon className="ml-4" icon={faSignOutAlt} />
-                </a>
+                </span>
               </li>
             </ul>
           </div>
